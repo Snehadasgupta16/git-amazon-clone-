@@ -6,6 +6,7 @@
     <title>Amazon clone</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style (amazon clone).css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
     <header>
@@ -213,6 +214,96 @@
     </div>
 
    </footer>
+
+
+
+    <div id="root"></div>
+
+  <!-- Include React and ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <!-- Include Babel for JSX Compilation -->
+  <script src="https://unpkg.com/@babel/standalone"></script>
+
+    <script type="text/babel">
+  // React Component for Navbar
+  const Navbar = () => {
+    const [isOpen, setIsOpen] = React.useState(false);
+    
+    const toggleNavbar = () => {
+      setIsOpen(!isOpen);
+    };
+    
+    return (
+      <div className="navbar">
+        <div className="nav-logo">
+          <img src="amazon_logo.png" alt="Amazon Logo" />
+        </div>
+        <div className="nav-toggle" onClick={toggleNavbar}>
+          <i className="fa fa-bars"></i>
+        </div>
+        
+        {/* Mobile Menu */}
+        <div className={`mobile-menu ${isOpen ? "open" : ""}`}>
+          <p>Home</p>
+          <p>Today's Deals</p>
+          <p>Customer Service</p>
+          <p>Registry</p>
+          <p>Sell</p>
+        </div>
+
+        <div className="nav-cart">
+          <i className="fa fa-shopping-cart"></i>
+        </div>
+      </div>
+    );
+  };
+
+  // React Component for Product Box
+  const Product = ({ image, title }) => {
+    return (
+      <div className="box">
+        <div className="box-img" style={{ backgroundImage: `url(${image})` }}></div>
+        <div className="box-content">
+          <p>{title}</p>
+        </div>
+      </div>
+    );
+  };
+
+  // React Component for the Shop Section
+  const ShopSection = () => {
+    const products = [
+      { image: "box1_img.jpg", title: "Product 1" },
+      { image: "box2_img.jpg", title: "Product 2" },
+      { image: "box3_img.jpg", title: "Product 3" },
+      { image: "box4_img.jpg", title: "Product 4" },
+    ];
+
+    return (
+      <div className="shop-section">
+        {products.map((product, index) => (
+          <Product key={index} image={product.image} title={product.title} />
+        ))}
+      </div>
+    );
+  };
+
+  // Main App Component
+  const App = () => {
+    return (
+      <div>
+        <Navbar />
+        <ShopSection />
+      </div>
+    );
+  };
+
+  // Render the React app
+  ReactDOM.render(<App />, document.getElementById("root"));
+</script>
+
     
 </body>
 </html>
